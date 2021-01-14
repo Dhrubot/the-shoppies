@@ -5,10 +5,12 @@ import NominationList from './components/NominationList'
 
 const App = () => {
 
+  const [movies, setMovies] = useState(["I am a movie!!!", "I am movie number 2"])
+
   return (
     <div>
       <SearchBar />
-      <MovieList />
+      <MovieList movies={movies}/>
       <NominationList />
     </div>
   )

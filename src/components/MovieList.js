@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MovieList = () => {
+const MovieList = ({ movies }) => {
     return (
         <div>
-            Hi I am movie List
+            {movies.map((m, idx) => <h6>{m}</h6>)}
         </div>
     )
 }
