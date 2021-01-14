@@ -1,12 +1,19 @@
 import React from 'react'
 
-const SearchBar = ({ query }) => {
+const SearchBar = ({ query, setQuery }) => {
+
+    const handleOnChange = e => {
+        setQuery(e.target.value)
+    }
+
+
     return (
         <div>
             <form>
                 <label>
-                    <input type='text' value={ query }/>
+                    <input type='text' value={ query } onChange={ handleOnChange }/>
                 </label>
+                <button>Search</button>
             </form>
         </div>
     )
