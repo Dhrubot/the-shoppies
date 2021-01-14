@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SearchBar = () => {
+const SearchBar = ({ query }) => {
     return (
         <div>
-            Hi I am searchbar!
+            { query }
         </div>
     )
 }
