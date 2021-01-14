@@ -1,9 +1,9 @@
 import React from 'react'
 
-const NominationList = () => {
+const NominationList = ({ nominated }) => {
     return (
         <div>
-            Hi I am nomination List!
+            { nominated.map((movie, idx) => <h6 key={idx}>{ movie }</h6>) }
         </div>
     )
 }

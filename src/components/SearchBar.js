@@ -3,7 +3,11 @@ import React from 'react'
 const SearchBar = ({ query }) => {
     return (
         <div>
-            { query }
+            <form>
+                <label>
+                    <input type='text' value={ query }/>
+                </label>
+            </form>
         </div>
     )
 }
