@@ -3,7 +3,7 @@ import React from 'react'
 const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
 
     const handleAddingNomination = (nominatedMovies, movie) => {
-        nominateMovie([...nominatedMovies, movie])
+        nominatedMovies.length === 5 ? <h2>You already chose 5 movies.</h2> : nominateMovie([...nominatedMovies, movie])
     }
     
 
