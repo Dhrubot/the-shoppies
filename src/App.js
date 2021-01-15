@@ -5,26 +5,20 @@ import NominationList from './components/NominationList'
 
 const App = () => {
 
-  const API_KEY = 'a48618b7'
-  const API_URL = `http://www.omdbapi.com/?apikey=${API_KEY}&s=`
-
   const [movies, setMovies] = useState([])
   const [nominatedMovies, setNominatedMovies] = useState(['I am the one you nominated'])
-  const [searchQuery, setUserQuery] = useState('Search me!!!')
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-    getMovies(searchQuery)
+    fetch(`http://www.omdbapi.com/?apikey=a48618b7&s=${searchQuery}`)
+    .then(res => res.json())
+    .then(data => setMovies(data.Search))
   }, [searchQuery])
 
-  const getMovies = query =>{
-    fetch(`${API_URL}${query}`)
-    .then(res => res.json())
-    .then(data => console.log(data))
-  }
 
   return (
     <div>
-      <SearchBar query={ searchQuery } setQuery={ setUserQuery }/>
+      <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
       <MovieList movies={ movies }/>
       <NominationList nominated={ nominatedMovies }/>
     </div>
