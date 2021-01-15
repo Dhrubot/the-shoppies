@@ -9,7 +9,7 @@ const SearchBar = ({ query, setQuery }) => {
 
     return (
         <div>
-            <form>
+            <form onSubmit={e => e.preventDefault()}>
                 <label>
                     <input type='text' value={ query } onChange={ handleOnChange }/>
                 </label>
