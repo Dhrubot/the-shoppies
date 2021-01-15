@@ -2,8 +2,18 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import MovieList from './components/MovieList'
 import NominationList from './components/NominationList'
+import{ Container, Grid }from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1
+  }
+}) 
 
 const App = () => {
+
+  const classes = useStyles()
 
   const [movies, setMovies] = useState([])
   const [nominatedMovies, setNominatedMovies] = useState([])
@@ -17,10 +27,18 @@ const App = () => {
 
 
   return (
-    <div>
-      <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
-      <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
-      <NominationList nominated={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
+    <div className={classes.root}>
+      <Grid container direction='row' alignItems='center' justify='center' >
+        <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
+      </Grid>
+      <Grid container>
+        <Grid item xs={6}>
+          <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
+        </Grid>
+        <Grid item sx={6}>
+          <NominationList nominated={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
+        </Grid>
+      </Grid>
     </div>
   )
 }
