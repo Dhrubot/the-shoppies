@@ -6,7 +6,7 @@ import NominationList from './components/NominationList'
 const App = () => {
 
   const [movies, setMovies] = useState([])
-  const [nominatedMovies, setNominatedMovies] = useState(['I am the one you nominated'])
+  const [nominatedMovies, setNominatedMovies] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
@@ -19,8 +19,8 @@ const App = () => {
   return (
     <div>
       <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
-      <MovieList movies={ movies }/>
-      <NominationList nominated={ nominatedMovies }/>
+      <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
+      <NominationList nominated={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
     </div>
   )
 }
