@@ -1,13 +1,17 @@
 import React from 'react'
+import MovieCard from './MovieCard'
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
+
     const movieList = (
         <ul>
             { movies === undefined || movies.length === 0  ? (
                 <></>
             ) : (
-                movies.map((movie, idx) => {
-                    return <li key={ idx }>{ movie.Title }</li>
+                movies.map(movie => {
+                    return (
+                        <MovieCard movie={movie} nominateMovie={nominateMovie} nominatedMovies={ nominatedMovies }/>
+                    )
                 })
             )}
         </ul>
