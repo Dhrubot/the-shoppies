@@ -7,12 +7,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
-  root: {
-    flexGrow: 1
-  },
-  searchContainer: {
-    margin: 'auto'
-  }
 }) 
 
 const theme = createMuiTheme({
@@ -39,14 +33,14 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container spacing={4}  >
-        <Grid item xs={12} className={classes.searchContainer} >
+      <Grid container spacing={2}  >
+        <Grid item xs={12} >
           <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>
           <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
           <NominationList nominated={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
         </Grid>
       </Grid>

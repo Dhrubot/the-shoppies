@@ -5,7 +5,8 @@ import { Card } from '@material-ui/core'
 
 const useStyles = makeStyles({
     nominatedListBox: {
-        height: '100vh',
+        height: '60vh',
+        maxHeight: '100vh',
         overflow: 'auto',
         margin: 20
     }
