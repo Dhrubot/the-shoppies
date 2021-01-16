@@ -45,7 +45,7 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
                 />
             </CardActionArea>
             <CardContent>
-                <Button fullWidth='true' variant='contained' style={{color: 'red'}} onClick={ () => handleAddingNomination(nominatedMovies, movie)} disabled={nominatedMovies.includes(movie)}>NOMINATE</Button>
+                <Button fullWidth variant='contained' style={{color: 'red'}} onClick={ () => handleAddingNomination(nominatedMovies, movie)} disabled={nominatedMovies.includes(movie)}>NOMINATE</Button>
             </CardContent>
         </Card>
     )

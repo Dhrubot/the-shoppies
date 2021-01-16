@@ -29,7 +29,6 @@ const App = () => {
     .then(data => setMovies(data.Search))
   }, [searchQuery])
 
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import NominatedListItem from './NominatedListItem'
 import { makeStyles } from "@material-ui/core/styles"
 import { 
     Card, 
@@ -10,9 +11,6 @@ import {
     Button,
     List,
     CardContent,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -41,9 +39,17 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
     }
 
     const handleRemove = (nominatedMovies, movieID) => {
-        let newState = nominatedMovies.filter(m => movieID !== m.imdbID)
-        setNominatedMovies(newState)
+        if (nominatedMovies === undefined || nominatedMovies === 0) {
+            return []
+        } else {
+            let newState = nominatedMovies.filter(m => movieID !== m.imdbID)
+            setNominatedMovies(newState)
+        }
     }
+
+    useEffect(() => {
+        handleRemove()
+    }, [])
     
     return (
         <Card className={classes.nominatedListBox} >
@@ -79,17 +85,11 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
             <CardContent>
                 <List>
                     {nominatedMovies?.length ? (
-                        nominatedMovies.map((movie, idx) =>
-                        <ListItem key={idx}>
-                            <ListItemAvatar>
-                                <img 
-                                    alt={movie.Title}
-                                    src={movie.Poster}
-                                />
-                            </ListItemAvatar>
-                        </ListItem>)
-                        ) : (
-                        <h1></h1>)}
+                        nominatedMovies.map(movie =>
+                        <NominatedListItem movie={movie} handleRemove={ handleRemove } nominationList={nominatedMovies}/>
+                        )) : (
+                        <h1></h1>)
+                    }
                 </List>
             </CardContent>
         </Card>
