@@ -12,7 +12,7 @@ import {
   const useStyles = makeStyles({
     moviesListBox: {
         minHeight: '40vh',
-        maxHeight: '80vh',
+        maxHeight: '100vh',
         overflow: 'auto',
         margin: 20,
         display: 'flex',

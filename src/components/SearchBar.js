@@ -11,15 +11,18 @@ const useStyles = makeStyles({
         width: '100%',
         color: 'white',
         outline: 'none',
-        fontSize: 16,
+        fontSize: 20,
+        paddingLeft: '50px'
     },
     containerCard: {
-        width: '75%',
+        width: '50%',
+        minWidth: '200px',
         backgroundColor: 'rgba(48, 48, 48, 0.1)',
         border: 'none',
         boxShadow: 'none',
-        display: 'flexbox',
-        marginLeft: '15%'
+        display: 'flex',
+        marginLeft: '25%',
+        justifyContent: 'center'
     }
 })
 
@@ -33,8 +36,8 @@ const SearchBar = ({ query, setQuery }) => {
     return (
         <>
         <Card className={classes.containerCard}>
-            <form onSubmit={e => e.preventDefault()}>
-                <input className={classes.input} type='text' value={ query } onChange={ handleOnChange } placeholder='Search for your favorite movie here'/>
+            <form onSubmit={e => e.preventDefault()} style={{width: '100%'}}>
+                <input className={classes.input} type='text' value={ query } onChange={ handleOnChange } placeholder='Search for your favorite movies here'/>
             </form>
         </Card>
         </>
