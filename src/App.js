@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import MovieList from './components/MovieList'
 import NominationList from './components/NominationList'
-import{ Container, Grid }from '@material-ui/core'
+import{ Grid, CssBaseline, createMuiTheme, Card }from '@material-ui/core'
+import { ThemeProvider } from "@material-ui/styles";
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -10,6 +11,12 @@ const useStyles = makeStyles({
     flexGrow: 1
   }
 }) 
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark"
+  }
+})
 
 const App = () => {
 
@@ -27,20 +34,22 @@ const App = () => {
 
 
   return (
-    <div className={classes.root}>
-      <Grid container direction='row' alignItems='center' justify='center' >
-        <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
-      </Grid>
-      <Grid container>
-        <Grid item xs={6}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
+        </Grid>
+        <Grid item xs={6} >
           <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
         </Grid>
-        <Grid item sx={6}>
+        <Grid item xs={6} >
           <NominationList nominated={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
         </Grid>
       </Grid>
-    </div>
+    </ThemeProvider>
   )
+  
 }
 
 export default App
