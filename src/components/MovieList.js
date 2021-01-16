@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import {
     Card,
     CardHeader,
-    CardContent,
+    Divider,
     Typography,
   } from "@material-ui/core";
 
@@ -42,6 +42,8 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
     return (
         <>
             <Card className={classes.moviesListBox}>
+                <CardHeader title='Search result for'/>
+                <Divider variant="middle" />
                 { movieList }
             </Card>
         </>
