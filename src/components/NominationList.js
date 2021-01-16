@@ -4,8 +4,11 @@ import {
     Card, 
     CardHeader, 
     Divider,
-    Grid
+    Grid,
+    Typography,
+    IconButton,
 } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 
 const useStyles = makeStyles({
@@ -17,7 +20,7 @@ const useStyles = makeStyles({
     }
 })
 
-const NominationList = ({ nominated, setNominatedMovies }) => {
+const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
 
     const classes = useStyles()
 
@@ -32,13 +35,24 @@ const NominationList = ({ nominated, setNominatedMovies }) => {
             <Divider variant="middle" />
             <Grid container>
                 <Grid item xs={8}> 
+                    <Typography component='h6' style={{ display: 'flex', marginLeft: '16px'}}>
+                        {nominatedMovies ? nominatedMovies?.length : '0'} Nominations
+                    </Typography>
                 </Grid>
             </Grid>
-        { nominated?.length ? nominated.map((movie, idx) => 
+            <Grid item xs={2}>
+                <IconButton>
+                    <DeleteIcon />
+                </IconButton>
+            </Grid>
+            <Grid item xs={2}>
+
+            </Grid>
+        { nominatedMovies?.length ? nominatedMovies.map((movie, idx) => 
         <CardHeader key={idx}>
             <>
                 <h2>{ movie.Title }</h2>
-                <button onClick={ () => handleRemove(nominated, movie.imdbID) }>Remove</button>
+                <button onClick={ () => handleRemove(nominatedMovies, movie.imdbID) }>Remove</button>
             </>
         </CardHeader>
         ) : <Card className={classes.nominatedListBox}>No movies yet!</Card>}
