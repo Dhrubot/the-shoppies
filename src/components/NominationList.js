@@ -8,7 +8,11 @@ import {
     Typography,
     IconButton,
     Button,
-    List
+    List,
+    CardContent,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -72,6 +76,22 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
             </>
         </CardHeader>
         ) : <Card className={classes.nominatedListBox}>No movies yet!</Card>} */}
+            <CardContent>
+                <List>
+                    {nominatedMovies?.length ? (
+                        nominatedMovies.map((movie, idx) =>
+                        <ListItem key={idx}>
+                            <ListItemAvatar>
+                                <img 
+                                    alt={movie.Title}
+                                    src={movie.Poster}
+                                />
+                            </ListItemAvatar>
+                        </ListItem>)
+                        ) : (
+                        <h1></h1>)}
+                </List>
+            </CardContent>
         </Card>
     )
 }
