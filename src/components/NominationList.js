@@ -1,6 +1,11 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core/styles"
-import { Card } from '@material-ui/core'
+import { 
+    Card, 
+    CardHeader, 
+    Divider,
+    Grid
+} from '@material-ui/core'
 
 
 const useStyles = makeStyles({
@@ -22,18 +27,22 @@ const NominationList = ({ nominated, setNominatedMovies }) => {
     }
     
     return (
-        <>
+        <Card className={classes.nominatedListBox} >
+            <CardHeader title='Nominations List' subheader='Maximum 5 nominations allowed.'/>
+            <Divider variant="middle" />
+            <Grid container>
+                <Grid item xs={8}> 
+                </Grid>
+            </Grid>
         { nominated?.length ? nominated.map((movie, idx) => 
-        <Card className={classes.nominatedListBox} key={idx}>
-            
-                <>
+        <CardHeader key={idx}>
+            <>
                 <h2>{ movie.Title }</h2>
                 <button onClick={ () => handleRemove(nominated, movie.imdbID) }>Remove</button>
-                </>
-            
-        </Card>
+            </>
+        </CardHeader>
         ) : <Card className={classes.nominatedListBox}>No movies yet!</Card>}
-        </>
+        </Card>
     )
 }
 

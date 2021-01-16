@@ -24,7 +24,7 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=a48618b7&s=${searchQuery}`)
+    fetch(`http://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${searchQuery}`)
     .then(res => res.json())
     .then(data => setMovies(data.Search))
   }, [searchQuery])
