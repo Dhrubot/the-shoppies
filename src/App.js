@@ -9,6 +9,9 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   root: {
     flexGrow: 1
+  },
+  searchContainer: {
+    margin: 'auto'
   }
 }) 
 
@@ -36,8 +39,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid container spacing={4}  >
+        <Grid item xs={12} className={classes.searchContainer} >
           <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
         </Grid>
         <Grid item xs={6} >
