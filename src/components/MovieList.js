@@ -3,17 +3,22 @@ import MovieCard from './MovieCard'
 import { makeStyles } from "@material-ui/core/styles"
 import {
     Card,
-    Grid,
+    CardHeader,
+    CardContent,
     Typography,
   } from "@material-ui/core";
 
 
   const useStyles = makeStyles({
     moviesListBox: {
-        height: '100vh',
+        minHeight: '40vh',
+        maxHeight: '80vh',
         overflow: 'auto',
-        margin: 20
-    }
+        margin: 20,
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+    },
 })
 
 const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
@@ -37,7 +42,6 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
     return (
         <>
             <Card className={classes.moviesListBox}>
-                {movieListHeader}
                 { movieList }
             </Card>
         </>

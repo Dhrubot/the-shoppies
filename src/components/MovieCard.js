@@ -1,25 +1,24 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, CardMedia, CardActions } from '@material-ui/core';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, CardActionArea, Button, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     card: {
-        margin: "120px auto 50px",
-        maxWidth: 345,
-        overflow: "visible",
+        width: 250,
+        height: 400,
+        margin: '8px',
+        backgroundColor: 'rgba(0, 0, 0, 0.1)'
     },
     cardMedia: {
-        margin: "-70px auto 0",
-        width: "80%",
-        height: 140,
-        borderRadius: "4px",
-        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)",
-        position: "relative",
-        zIndex: 1000
+        width: '100%',
+        height: 250,
+        display: 'block',
+        paddingTop: '56.25%',
+        marginTop:'20px'
     },
     cardHeader: {
-        color: 'black',
-        backgroundColor: 'white'
+        color: 'white',
+        backgroundColor: 'rgba 0 0 0 0.1',
     },
 })
 
@@ -34,14 +33,20 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
 
     return (
         <Card className={classes.card} key={movie.imdbID}>
-            <CardMedia
-                className={classes.cardMedia}
-                image={movie.Poster}
-            />
-            <CardHeader className={classes.cardHeader} title={movie.Title}/>
-            <CardActions>
-                <button onClick={ () => handleAddingNomination(nominatedMovies, movie)} disabled={nominatedMovies.includes(movie)}>Nominate</button>
-            </CardActions>
+            <CardActionArea>
+                <CardContent>
+                    <Typography>
+                        {movie.Title}
+                    </Typography>
+                </CardContent>
+                <CardMedia
+                    className={classes.cardMedia}
+                    image={movie.Poster}
+                />
+            </CardActionArea>
+            <CardContent>
+                <Button fullWidth='true' variant='contained' style={{color: 'red'}} onClick={ () => handleAddingNomination(nominatedMovies, movie)} disabled={nominatedMovies.includes(movie)}>NOMINATE</Button>
+            </CardContent>
         </Card>
     )
 }
