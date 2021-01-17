@@ -1,7 +1,7 @@
 ## The Shoppies: Movie awards for entrepreneurs
 # Made for the Shopify Front End Developer Internship( Summer 2021 )
 
-![alt text](https://ibb.co/xDnPKB0)
+/Users/macbookpro/Desktop/the-shoppies/src/images/Screenshot.png
 
 Check out the Live Build here.
 https://dhrubot.github.io/the-shoppies/
