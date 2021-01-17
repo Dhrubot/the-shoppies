@@ -27,7 +27,7 @@ const App = () => {
   }, [searchQuery, page]);
 
   const getMovies = (query, page) => {
-    fetch(`http://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`)
+    fetch(`https://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`)
     .then((res) => res.json())
     .then((data) => {
       setMovies(data.Search)
