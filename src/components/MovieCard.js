@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DefaultImg from "../images/NoImage.jpg";
 import {
@@ -34,20 +34,15 @@ const useStyles = makeStyles({
 const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
   const classes = useStyles();
 
-  // Notification if wants to add movies afer 5 movies
-
   // default movie poster
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
 
   //imdb Redirects
-  const imdbURL = `https://imdb.com/title/${movie.imdbID}`
-
+  const imdbURL = `https://imdb.com/title/${movie.imdbID}`;
 
   return (
-    <Card className={classes.card} key={(movie.imdbID)}>
-      <CardActions
-        onClick={() => window.open(imdbURL)}
-      >
+    <Card className={classes.card} key={movie.imdbID}>
+      <CardActions onClick={() => window.open(imdbURL)}>
         <CardActionArea>
           <CardContent>
             <Typography>{movie.Title}</Typography>

@@ -1,6 +1,6 @@
 import React from "react";
 import NominatedListItem from "./NominatedListItem";
-import ReachedFiveNominations from './ReachedFiveNominations'
+import ReachedFiveNominations from "./ReachedFiveNominations";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -31,9 +31,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NominationList = ({ nominatedMovies, clearList, removeMovie }) => {
-
   const classes = useStyles();
-  const canAddNomination = nominatedMovies.length === 5
+  const canAddNomination = nominatedMovies.length === 5;
 
   const nominationInfo = (
     <>
@@ -74,7 +73,7 @@ const NominationList = ({ nominatedMovies, clearList, removeMovie }) => {
 
   return (
     <SnackbarProvider>
-      <ReachedFiveNominations show={canAddNomination}/>
+      <ReachedFiveNominations show={canAddNomination} />
       <Card className={classes.nominatedListBox}>
         <CardHeader
           title="Nominations List"
@@ -92,7 +91,7 @@ const NominationList = ({ nominatedMovies, clearList, removeMovie }) => {
                 <NominatedListItem
                   key={idx}
                   movie={movie}
-                  removeMovie={ removeMovie }
+                  removeMovie={removeMovie}
                 />
               ))
             ) : (

@@ -5,7 +5,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 const ReachedFiveNominations = ({ show }) => {
   return (
     <Box>
-      <Collapse in={ show }>
+      <Collapse in={show}>
         <Alert severity="success">
           <AlertTitle>
             <Typography align="left">

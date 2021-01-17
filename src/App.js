@@ -8,7 +8,6 @@ import { Grid, CssBaseline, createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { useSnackbar } from "notistack";
 
-
 const theme = createMuiTheme({
   palette: {
     type: "dark",
@@ -16,34 +15,36 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
-
   const [movies, setMovies] = useState([]);
-  const [nominatedMovies, setNominatedMovies] = useState( JSON.parse(localStorage.getItem("nominatedMovies")) || [] )
+  const [nominatedMovies, setNominatedMovies] = useState(
+    JSON.parse(localStorage.getItem("nominatedMovies")) || []
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1)
-  const [totalResult, setTotalResult] = useState(0)
-  
-  const { enqueueSnackbar } = useSnackbar()
+  const [page, setPage] = useState(1);
+  const [totalResult, setTotalResult] = useState(0);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    getMovies(searchQuery, page)
+    getMovies(searchQuery, page);
   }, [searchQuery, page]);
 
   const getMovies = (query, page) => {
-    fetch(`https://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setMovies(data.Search)
-      setTotalResult(data.totalResults)
-    });
-  }
+    fetch(
+      `https://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.Search);
+        setTotalResult(data.totalResults);
+      });
+  };
   //local storage for persisiting data
 
   const onSetNomination = (nominations) => {
     setNominatedMovies(nominations);
     localStorage.setItem("nominatedMovies", JSON.stringify(nominations));
   };
-  
 
   const handleAddingNomination = (movie) => {
     const message =
@@ -52,14 +53,12 @@ const App = () => {
 
     nominatedMovies.length === 5
       ? enqueueSnackbar(message, snackbarColor)
-      : onSetNomination([...nominatedMovies, movie])
+      : onSetNomination([...nominatedMovies, movie]);
   };
 
   const handleClearList = () => {
     onSetNomination([]);
   };
-
-
 
   const handleRemoveNomination = (movieID) => {
     if (nominatedMovies === undefined || nominatedMovies === 0) {
@@ -71,9 +70,9 @@ const App = () => {
   };
 
   const handlePageChange = (event, value) => {
-    setPage(value)
-    getMovies(searchQuery, page)
-  }
+    setPage(value);
+    getMovies(searchQuery, page);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -87,19 +86,19 @@ const App = () => {
         <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>
           <MovieList
             movies={movies}
-            nominateMovie={ handleAddingNomination }
+            nominateMovie={handleAddingNomination}
             nominatedMovies={nominatedMovies}
             query={searchQuery}
             page={page}
-            handlePageChange={ handlePageChange }
+            handlePageChange={handlePageChange}
             totalResult={totalResult}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
           <NominationList
             nominatedMovies={nominatedMovies}
-            removeMovie={ handleRemoveNomination }
-            clearList={ handleClearList }
+            removeMovie={handleRemoveNomination}
+            clearList={handleClearList}
           />
         </Grid>
       </Grid>

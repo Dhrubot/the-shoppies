@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 const NominatedListItem = ({ movie, removeMovie }) => {
   const classes = useStyles();
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
-  
 
   return (
     <>
@@ -48,10 +47,7 @@ const NominatedListItem = ({ movie, removeMovie }) => {
         />
         <ListItemSecondaryAction>
           <Tooltip TransitionComponent={Zoom} title="DELETE">
-            <IconButton
-              edge="end"
-              onClick={() => removeMovie(movie.imdbID)}
-            >
+            <IconButton edge="end" onClick={() => removeMovie(movie.imdbID)}>
               <DeleteForeverRoundedIcon
                 style={{ color: "#e53935", fontSize: 28 }}
               />

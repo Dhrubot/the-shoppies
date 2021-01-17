@@ -16,7 +16,15 @@ const useStyles = makeStyles({
   },
 });
 
-const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handlePageChange, totalResult }) => {
+const MovieList = ({
+  movies,
+  nominateMovie,
+  nominatedMovies,
+  query,
+  page,
+  handlePageChange,
+  totalResult,
+}) => {
   const classes = useStyles();
 
   const movieList = (
@@ -51,27 +59,28 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handle
     </>
   );
 
-  const pagination = movies?.length ? 
-  <Pagination 
-    style={{marginBottom: '10px'}}
-    page={page}
-    count={Math.ceil(totalResult/10)}
-    onChange={handlePageChange}
-  /> : ''
+  const pagination = movies?.length ? (
+    <Pagination
+      style={{ marginBottom: "10px" }}
+      page={page}
+      count={Math.ceil(totalResult / 10)}
+      onChange={handlePageChange}
+    />
+  ) : (
+    ""
+  );
 
   return (
-      <Card className={classes.moviesListBox}>
-        <Grid container>
-          <Grid item xs={12}>
-            {movieListHeader}
-            <Divider variant="middle" />
-          </Grid>
+    <Card className={classes.moviesListBox}>
+      <Grid container>
+        <Grid item xs={12}>
+          {movieListHeader}
+          <Divider variant="middle" />
         </Grid>
-        <Grid container>
-          {movieList}
-        </Grid>
-          {pagination}
-      </Card>
+      </Grid>
+      <Grid container>{movieList}</Grid>
+      {pagination}
+    </Card>
   );
 };
 
