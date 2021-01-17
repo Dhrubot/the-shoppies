@@ -5,8 +5,10 @@ import {
     Card,
     CardHeader,
     Divider,
+    Grid,
     Typography,
   } from "@material-ui/core";
+  import {SnackbarProvider} from 'notistack';
 
 
   const useStyles = makeStyles({
@@ -40,13 +42,19 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
     )
 
     return (
-        <>
+        <SnackbarProvider>
             <Card className={classes.moviesListBox}>
-                <CardHeader title='Search result for'/>
-                <Divider variant="middle" />
-                { movieList }
+                <Grid container >
+                    <Grid Item xs={12}>
+                        <CardHeader title='Search result for'/>
+                        <Divider variant="middle" />
+                    </Grid>
+                </Grid>
+                <Grid container justifyContent='center'>
+                    { movieList }
+                </Grid>
             </Card>
-        </>
+        </SnackbarProvider>
     )
 }
 

@@ -74,14 +74,6 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
                 </Grid>
             </Grid>
             <Divider variant="middle" />
-        {/* { nominatedMovies?.length ? nominatedMovies.map((movie, idx) => 
-        <CardHeader key={idx}>
-            <>
-                <h2>{ movie.Title }</h2>
-                <button onClick={ () => handleRemove(nominatedMovies, movie.imdbID) }>Remove</button>
-            </>
-        </CardHeader>
-        ) : <Card className={classes.nominatedListBox}>No movies yet!</Card>} */}
             <CardContent>
                 <List>
                     {nominatedMovies?.length ? (

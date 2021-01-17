@@ -1,5 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import DefaultImg from '../images/NoImage.jpg'
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, CardActionArea, Button, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -25,15 +27,21 @@ const useStyles = makeStyles({
 const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
 
     const classes = useStyles()
+    const { enqueueSnackbar } = useSnackbar();
+
+
 
     const handleAddingNomination = (nominatedMovies, movie) => {
-        nominatedMovies.length === 5 ? <h2>You already chose 5 movies.</h2> : nominateMovie([...nominatedMovies, movie])
+        nominatedMovies.length === 5 ? enqueueSnackbar("You've nominated maxmium number of movies. Consider deleting from your nominated movie list.") : nominateMovie([...nominatedMovies, movie])
     }
+
+    const poster = movie?.Poster === 'N/A' ? DefaultImg : movie.Poster
     
 
     return (
         <Card className={classes.card} key={movie.imdbID}>
-            <CardActionArea>
+            <CardActionArea
+            >
                 <CardContent>
                     <Typography>
                         {movie.Title}
@@ -41,7 +49,7 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
                 </CardContent>
                 <CardMedia
                     className={classes.cardMedia}
-                    image={movie.Poster}
+                    image={poster}
                 />
             </CardActionArea>
             <CardContent>

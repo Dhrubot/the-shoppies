@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import DefaultImg from '../images/NoImage.jpg'
 import {
     ListItem,
     ListItemAvatar,
@@ -6,9 +7,12 @@ import {
     ListItemSecondaryAction,
     Typography,
     IconButton,
+    Divider
 } from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded'
 import {  makeStyles } from '@material-ui/core/styles'
+import Tooltip from '@material-ui/core/Tooltip'
+import Zoom from '@material-ui/core/Zoom'
 
 const useStyles = makeStyles({
     avatar: {
@@ -21,13 +25,15 @@ const useStyles = makeStyles({
 const NominatedListItem = ({ movie, handleRemove, nominationList }) => {
 
     const classes = useStyles()
+    const poster = movie?.Poster === 'N/A' ? DefaultImg : movie.Poster
 
     return (
+        <>
         <ListItem key={movie.imdbID}>
             <ListItemAvatar >
                 <img 
                     alt={movie.Title}
-                    src={movie.Poster}
+                    src={poster}
                     className={classes.avatar}
                 />
             </ListItemAvatar>
@@ -45,14 +51,18 @@ const NominatedListItem = ({ movie, handleRemove, nominationList }) => {
                 }
             />
             <ListItemSecondaryAction>
-                <IconButton
-                    edge='end'
-                    onClick={ () => handleRemove(nominationList, movie.imdbID) } 
-                >
-                    <DeleteIcon />
-                </IconButton>
+                <Tooltip TransitionComponent={Zoom} title="DELETE">
+                    <IconButton
+                        edge='end'
+                        onClick={ () => handleRemove(nominationList, movie.imdbID) } 
+                    >
+                        <DeleteForeverRoundedIcon style={{color: '#e53935', fontSize: 28}} />
+                    </IconButton>
+                </Tooltip>
             </ListItemSecondaryAction>
         </ListItem>
+        <Divider variant="inset" component="li" />
+        </>
     )
 }
 

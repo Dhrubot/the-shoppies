@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, Input, InputAdornment } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
     input: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
         color: 'white',
         outline: 'none',
         fontSize: 20,
-        paddingLeft: '50px',
+        paddingLeft: '30px',
         paddingRight: '30px'
     },
     containerCard: {
@@ -40,12 +41,14 @@ const SearchBar = ({ query, setQuery }) => {
             <form onSubmit={e => e.preventDefault()} style={{width: '100%'}}>
                 <Input 
                     className={classes.input} 
-                    type='text' 
+                    inputTypeSearch
                     value={ query } 
                     onChange={ handleOnChange } 
                     placeholder='Search'
                     disableUnderline
-                    endAdornment={<InputAdornment position="end">S</InputAdornment>}
+                    startAdornment={<InputAdornment position="start">
+                        <SearchIcon />
+                    </InputAdornment>}
                 />
             </form>
         </Card>
