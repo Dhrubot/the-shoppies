@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Card } from '@material-ui/core'
+import { Card, Input, InputAdornment } from '@material-ui/core'
 
 const useStyles = makeStyles({
     input: {
@@ -12,7 +12,8 @@ const useStyles = makeStyles({
         color: 'white',
         outline: 'none',
         fontSize: 20,
-        paddingLeft: '50px'
+        paddingLeft: '50px',
+        paddingRight: '30px'
     },
     containerCard: {
         width: '50%',
@@ -37,7 +38,15 @@ const SearchBar = ({ query, setQuery }) => {
         <>
         <Card className={classes.containerCard}>
             <form onSubmit={e => e.preventDefault()} style={{width: '100%'}}>
-                <input className={classes.input} type='text' value={ query } onChange={ handleOnChange } placeholder='Search for your favorite movies here'/>
+                <Input 
+                    className={classes.input} 
+                    type='text' 
+                    value={ query } 
+                    onChange={ handleOnChange } 
+                    placeholder='Search'
+                    disableUnderline
+                    endAdornment={<InputAdornment position="end">S</InputAdornment>}
+                />
             </form>
         </Card>
         </>
