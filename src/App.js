@@ -1,56 +1,77 @@
-import React, { useState, useEffect } from 'react'
-import SearchBar from './components/SearchBar'
-import MovieList from './components/MovieList'
-import Footer from './components/Footer'
-import NominationList from './components/NominationList'
-import { Header } from './components/Header'
-import { Grid, CssBaseline, createMuiTheme }from '@material-ui/core'
+import React, { useState, useEffect } from "react";
+import SearchBar from "./components/SearchBar";
+import MovieList from "./components/MovieList";
+import Footer from "./components/Footer";
+import NominationList from "./components/NominationList";
+import { Header } from "./components/Header";
+import { Grid, CssBaseline, createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-}) 
+const useStyles = makeStyles({});
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark"
-  }
-})
+    type: "dark",
+  },
+});
 
 const App = () => {
+  const classes = useStyles();
 
-  const classes = useStyles()
-
-  const [movies, setMovies] = useState([])
-  const [nominatedMovies, setNominatedMovies] = useState([])
-  const [searchQuery, setSearchQuery] = useState('')
+  const [movies, setMovies] = useState([]);
+  const [nominatedMovies, setNominatedMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1)
+  const [totalResult, setTotalResult] = useState(0)
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${searchQuery}`)
-    .then(res => res.json())
-    .then(data => setMovies(data.Search))
-  }, [searchQuery])
+    getMovies(searchQuery, page)
+  }, [searchQuery]);
+
+  const getMovies = (query, page) => {
+    fetch(`http://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setMovies(data.Search)
+      setTotalResult(data.totalResults)
+    });
+  }
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    getMovies(searchQuery, page)
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Header />
       <CssBaseline />
-      <Grid container spacing={2}  >
-        <Grid item xs={12} >
-          <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <SearchBar query={searchQuery} setQuery={setSearchQuery} />
         </Grid>
         <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>
-          <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies } query={searchQuery}/>
+          <MovieList
+            movies={movies}
+            nominateMovie={setNominatedMovies}
+            nominatedMovies={nominatedMovies}
+            query={searchQuery}
+            page={page}
+            handlePageChange={ handlePageChange }
+            totalResult={totalResult}
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-          <NominationList nominatedMovies={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
+          <NominationList
+            nominatedMovies={nominatedMovies}
+            setNominatedMovies={setNominatedMovies}
+          />
         </Grid>
       </Grid>
       <Footer />
     </ThemeProvider>
-  )
-  
-}
+  );
+};
 
-export default App
-
+export default App;
