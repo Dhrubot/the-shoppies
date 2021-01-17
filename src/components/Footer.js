@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <AppBar position="static" color="transparent">
       <Toolbar>
-        <Typography variant="body1">© 2020 Shoppies</Typography>
+        <Typography align="right" variant="body1">© 2021 Shoppies</Typography>
       </Toolbar>
     </AppBar>
   );
