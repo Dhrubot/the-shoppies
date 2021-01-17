@@ -30,25 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
+const NominationList = ({ nominatedMovies, clearList, removeMovie }) => {
 
   const classes = useStyles();
   const canAddNomination = nominatedMovies.length === 5
-
-  const handleClearList = () => {
-    setNominatedMovies([]);
-  };
-
-
-
-  const handleRemove = (nominatedMovies, movieID) => {
-    if (nominatedMovies === undefined || nominatedMovies === 0) {
-      return [];
-    } else {
-      let newState = nominatedMovies.filter((m) => movieID !== m.imdbID);
-      setNominatedMovies(newState);
-    }
-  };
 
   const nominationInfo = (
     <>
@@ -68,7 +53,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
               className={classes.button}
               startIcon={<DeleteIcon />}
               size="small"
-              onClick={handleClearList}
+              onClick={() => clearList()}
             >
               CLEAR LIST
             </Button>
@@ -107,8 +92,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
                 <NominatedListItem
                   key={idx}
                   movie={movie}
-                  handleRemove={handleRemove}
-                  nominationList={nominatedMovies}
+                  removeMovie={ removeMovie }
                 />
               ))
             ) : (

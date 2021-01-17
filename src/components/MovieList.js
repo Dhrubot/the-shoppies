@@ -2,7 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardHeader, Divider, Grid } from "@material-ui/core";
-import { SnackbarProvider } from "notistack";
 import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles({
@@ -61,13 +60,6 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handle
   /> : ''
 
   return (
-    <SnackbarProvider
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-      preventDuplicate
-    >
       <Card className={classes.moviesListBox}>
         <Grid container>
           <Grid item xs={12}>
@@ -80,7 +72,6 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handle
         </Grid>
           {pagination}
       </Card>
-    </SnackbarProvider>
   );
 };
 

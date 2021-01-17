@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import DefaultImg from "../images/NoImage.jpg";
 import {
   ListItem,
@@ -22,13 +22,10 @@ const useStyles = makeStyles({
   },
 });
 
-const NominatedListItem = ({ movie, handleRemove, nominationList }) => {
+const NominatedListItem = ({ movie, removeMovie }) => {
   const classes = useStyles();
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
   
-  useEffect(() => {
-    handleRemove();
-  }, [handleRemove]);
 
   return (
     <>
@@ -53,7 +50,7 @@ const NominatedListItem = ({ movie, handleRemove, nominationList }) => {
           <Tooltip TransitionComponent={Zoom} title="DELETE">
             <IconButton
               edge="end"
-              onClick={() => handleRemove(nominationList, movie.imdbID)}
+              onClick={() => removeMovie(movie.imdbID)}
             >
               <DeleteForeverRoundedIcon
                 style={{ color: "#e53935", fontSize: 28 }}

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DefaultImg from "../images/NoImage.jpg";
-import { useSnackbar } from "notistack";
 import {
   Card,
   CardMedia,
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
   card: {
     width: 250,
     height: 400,
-    margin: "8px",
+    margin: "auto",
     backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   cardMedia: {
@@ -36,17 +35,6 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
   const classes = useStyles();
 
   // Notification if wants to add movies afer 5 movies
-  const { enqueueSnackbar } = useSnackbar();
-  const handleAddingNomination = (nominatedMovies, movie) => {
-    const message =
-      "You've nominated maxmium number of movies. Delete items from nominations list to add more.";
-    const snackbarColor = { variant: "error" };
-
-    nominatedMovies.length === 5
-      ? enqueueSnackbar(message, snackbarColor)
-      : nominateMovie([...nominatedMovies, movie]);
-  };
-
 
   // default movie poster
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
@@ -72,7 +60,7 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
           fullWidth
           variant="contained"
           style={{ color: "red" }}
-          onClick={() => handleAddingNomination(nominatedMovies, movie)}
+          onClick={() => nominateMovie(movie)}
           disabled={nominatedMovies.includes(movie)}
         >
           NOMINATE

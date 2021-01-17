@@ -6,6 +6,7 @@ import NominationList from "./components/NominationList";
 import { Header } from "./components/Header";
 import { Grid, CssBaseline, createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
+import { useSnackbar } from "notistack";
 
 
 const theme = createMuiTheme({
@@ -17,10 +18,12 @@ const theme = createMuiTheme({
 const App = () => {
 
   const [movies, setMovies] = useState([]);
-  const [nominatedMovies, setNominatedMovies] = useState([]);
+  const [nominatedMovies, setNominatedMovies] = useState( JSON.parse(localStorage.getItem("nominatedMovies")) || [] )
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1)
   const [totalResult, setTotalResult] = useState(0)
+  
+  const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
     getMovies(searchQuery, page)
@@ -34,6 +37,34 @@ const App = () => {
       setTotalResult(data.totalResults)
     });
   }
+  
+
+  const handleAddingNomination = (movie) => {
+    const message =
+      "You've nominated maxmium number of movies. Delete items from nominations list to add more.";
+    const snackbarColor = { variant: "error" };
+
+    nominatedMovies.length === 5
+      ? enqueueSnackbar(message, snackbarColor)
+      : setNominatedMovies([...nominatedMovies, movie])
+      localStorage.setItem("nominatedMovies", JSON.stringify(nominatedMovies))
+  };
+
+  const handleClearList = () => {
+    setNominatedMovies([]);
+    localStorage.getItem("nominatedMovies")
+  };
+
+
+
+  const handleRemoveNomination = (movieID) => {
+    if (nominatedMovies === undefined || nominatedMovies === 0) {
+      return [];
+    } else {
+      let newState = nominatedMovies.filter((m) => movieID !== m.imdbID);
+      setNominatedMovies(newState);
+    }
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value)
@@ -51,7 +82,7 @@ const App = () => {
         <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>
           <MovieList
             movies={movies}
-            nominateMovie={setNominatedMovies}
+            nominateMovie={ handleAddingNomination }
             nominatedMovies={nominatedMovies}
             query={searchQuery}
             page={page}
@@ -62,7 +93,8 @@ const App = () => {
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
           <NominationList
             nominatedMovies={nominatedMovies}
-            setNominatedMovies={setNominatedMovies}
+            removeMovie={ handleRemoveNomination }
+            clearList={ handleClearList }
           />
         </Grid>
       </Grid>

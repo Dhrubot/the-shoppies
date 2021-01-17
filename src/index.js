@@ -2,10 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { SnackbarProvider } from "notistack";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <App />,
+  <SnackbarProvider 
+    anchorOrigin={{
+    vertical: "top",
+    horizontal: "center",
+  }}
+  preventDuplicate
+  >
+    <App />
+  </SnackbarProvider>,
   document.getElementById('root')
 );
 
