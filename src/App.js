@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import MovieList from './components/MovieList'
 import NominationList from './components/NominationList'
-import{ Grid, CssBaseline, createMuiTheme, Card }from '@material-ui/core'
+import { Header } from './components/Header'
+import { Grid, CssBaseline, createMuiTheme }from '@material-ui/core'
 import { ThemeProvider } from "@material-ui/styles";
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <CssBaseline />
       <Grid container spacing={2}  >
         <Grid item xs={12} >
