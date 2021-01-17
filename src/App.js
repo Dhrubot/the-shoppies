@@ -37,6 +37,12 @@ const App = () => {
       setTotalResult(data.totalResults)
     });
   }
+  //local storage for persisiting data
+
+  const onSetNomination = (nominations) => {
+    setNominatedMovies(nominations);
+    localStorage.setItem("nominatedMovies", JSON.stringify(nominations));
+  };
   
 
   const handleAddingNomination = (movie) => {
@@ -46,13 +52,11 @@ const App = () => {
 
     nominatedMovies.length === 5
       ? enqueueSnackbar(message, snackbarColor)
-      : setNominatedMovies([...nominatedMovies, movie])
-      localStorage.setItem("nominatedMovies", JSON.stringify(nominatedMovies))
+      : onSetNomination([...nominatedMovies, movie])
   };
 
   const handleClearList = () => {
-    setNominatedMovies([]);
-    localStorage.getItem("nominatedMovies")
+    onSetNomination([]);
   };
 
 
@@ -62,7 +66,7 @@ const App = () => {
       return [];
     } else {
       let newState = nominatedMovies.filter((m) => movieID !== m.imdbID);
-      setNominatedMovies(newState);
+      onSetNomination(newState);
     }
   };
 
@@ -73,6 +77,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      {console.log(nominatedMovies)}
       <Header />
       <CssBaseline />
       <Grid container spacing={2}>
