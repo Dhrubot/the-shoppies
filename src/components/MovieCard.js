@@ -14,7 +14,7 @@ const useStyles = makeStyles({
         height: 250,
         display: 'block',
         paddingTop: '56.25%',
-        marginTop:'20px'
+        marginTop:'10px'
     },
     cardHeader: {
         color: 'white',
