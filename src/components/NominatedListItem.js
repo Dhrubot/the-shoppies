@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import DefaultImg from "../images/NoImage.jpg";
 import {
   ListItem,
@@ -25,10 +25,14 @@ const useStyles = makeStyles({
 const NominatedListItem = ({ movie, handleRemove, nominationList }) => {
   const classes = useStyles();
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
+  
+  useEffect(() => {
+    handleRemove();
+  }, [handleRemove]);
 
   return (
     <>
-      <ListItem key={movie.imdbID}>
+      <ListItem>
         <ListItemAvatar>
           <img alt={movie.Title} src={poster} className={classes.avatar} />
         </ListItemAvatar>

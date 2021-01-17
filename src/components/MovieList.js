@@ -25,9 +25,10 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handle
       {movies === undefined || movies.length === 0 ? (
         <></>
       ) : (
-        movies.map((movie) => {
+        movies.map((movie, idx) => {
           return (
             <MovieCard
+              key={idx}
               movie={movie}
               nominateMovie={nominateMovie}
               nominatedMovies={nominatedMovies}
@@ -69,12 +70,12 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies, query, page, handle
     >
       <Card className={classes.moviesListBox}>
         <Grid container>
-          <Grid Item xs={12}>
+          <Grid item xs={12}>
             {movieListHeader}
             <Divider variant="middle" />
           </Grid>
         </Grid>
-        <Grid container justifyContent="center">
+        <Grid container>
           {movieList}
         </Grid>
           {pagination}

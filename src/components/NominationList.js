@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NominatedListItem from "./NominatedListItem";
+import ReachedFiveNominations from './ReachedFiveNominations'
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -30,13 +31,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
-  const classes = useStyles();
 
-  const isComepletedNominations = nominatedMovies.length === 5;
+  const classes = useStyles();
+  const canAddNomination = nominatedMovies.length === 5
 
   const handleClearList = () => {
     setNominatedMovies([]);
   };
+
+
 
   const handleRemove = (nominatedMovies, movieID) => {
     if (nominatedMovies === undefined || nominatedMovies === 0) {
@@ -46,10 +49,6 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
       setNominatedMovies(newState);
     }
   };
-
-  useEffect(() => {
-    handleRemove();
-  }, []);
 
   const nominationInfo = (
     <>
@@ -90,6 +89,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
 
   return (
     <SnackbarProvider>
+      <ReachedFiveNominations show={canAddNomination}/>
       <Card className={classes.nominatedListBox}>
         <CardHeader
           title="Nominations List"
@@ -103,15 +103,16 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
         <CardContent>
           <List>
             {nominatedMovies?.length ? (
-              nominatedMovies.map((movie) => (
+              nominatedMovies.map((movie, idx) => (
                 <NominatedListItem
+                  key={idx}
                   movie={movie}
                   handleRemove={handleRemove}
                   nominationList={nominatedMovies}
                 />
               ))
             ) : (
-              <h1></h1>
+              <></>
             )}
           </List>
         </CardContent>

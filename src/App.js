@@ -6,9 +6,7 @@ import NominationList from "./components/NominationList";
 import { Header } from "./components/Header";
 import { Grid, CssBaseline, createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({});
 
 const theme = createMuiTheme({
   palette: {
@@ -17,7 +15,6 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
-  const classes = useStyles();
 
   const [movies, setMovies] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
@@ -27,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     getMovies(searchQuery, page)
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   const getMovies = (query, page) => {
     fetch(`http://www.omdbapi.com/?apikey=a48618b7&type=movie&s=${query}&page=${page}`)

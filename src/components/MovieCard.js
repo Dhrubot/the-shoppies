@@ -4,7 +4,6 @@ import DefaultImg from "../images/NoImage.jpg";
 import { useSnackbar } from "notistack";
 import {
   Card,
-  CardHeader,
   CardMedia,
   CardContent,
   CardActions,
@@ -40,33 +39,34 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
   const { enqueueSnackbar } = useSnackbar();
   const handleAddingNomination = (nominatedMovies, movie) => {
     const message =
-      "You've nominated maxmium number of movies. Delete items from your nomination list to add more movies.";
+      "You've nominated maxmium number of movies. Delete items from nominations list to add more.";
     const snackbarColor = { variant: "error" };
 
     nominatedMovies.length === 5
       ? enqueueSnackbar(message, snackbarColor)
       : nominateMovie([...nominatedMovies, movie]);
   };
-  //Notifications after done adding 5 movies
-  const success =
-    nominatedMovies.length === 5
-      ? enqueueSnackbar(
-          "Thank you! You have chosen your 5 favorite movies for the shoppies",
-          { variant: "success" }
-        )
-      : "";
+
 
   // default movie poster
   const poster = movie?.Poster === "N/A" ? DefaultImg : movie.Poster;
 
+  //imdb Redirects
+  const imdbURL = `https://imdb.com/title/${movie.imdbID}`
+
+
   return (
-    <Card className={classes.card} key={movie.imdbID}>
-      <CardActionArea>
-        <CardContent>
-          <Typography>{movie.Title}</Typography>
-        </CardContent>
-        <CardMedia className={classes.cardMedia} image={poster} />
-      </CardActionArea>
+    <Card className={classes.card} key={(movie.imdbID)}>
+      <CardActions
+        onClick={() => window.open(imdbURL)}
+      >
+        <CardActionArea>
+          <CardContent>
+            <Typography>{movie.Title}</Typography>
+          </CardContent>
+          <CardMedia className={classes.cardMedia} image={poster} />
+        </CardActionArea>
+      </CardActions>
       <CardContent>
         <Button
           fullWidth

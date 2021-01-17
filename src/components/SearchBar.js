@@ -40,7 +40,6 @@ const SearchBar = ({ query, setQuery }) => {
         <form onSubmit={(e) => e.preventDefault()} style={{ width: "100%" }}>
           <Input
             className={classes.input}
-            inputTypeSearch
             value={query}
             onChange={handleOnChange}
             placeholder="Search"
