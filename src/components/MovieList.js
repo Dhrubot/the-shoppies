@@ -6,9 +6,8 @@ import {
     CardHeader,
     Divider,
     Grid,
-    Typography,
   } from "@material-ui/core";
-  import {SnackbarProvider} from 'notistack';
+import { SnackbarProvider } from 'notistack';
 
 
   const useStyles = makeStyles({
@@ -23,10 +22,10 @@ import {
     },
 })
 
-const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
+const MovieList = ({ movies, nominateMovie, nominatedMovies, query }) => {
 
     const classes = useStyles()
-    const movieListHeader = <h2>Movielist</h2>
+
     const movieList = (
         <>
             { movies === undefined || movies.length === 0  ? (
@@ -41,12 +40,26 @@ const MovieList = ({ movies, nominateMovie, nominatedMovies }) => {
         </>
     )
 
+    const movieListHeader = (<>
+        { movies === undefined || movies.length === 0  ? (
+            <CardHeader title='Search By Movie Name.' subheader='Use 3 or more character.'/>)
+            :
+            (<CardHeader title={`Search result for "${query}"`}/>
+        ) }
+    </>)
+
     return (
-        <SnackbarProvider>
+        <SnackbarProvider  
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+            }}
+            preventDuplicate
+        >
             <Card className={classes.moviesListBox}>
                 <Grid container >
                     <Grid Item xs={12}>
-                        <CardHeader title='Search result for'/>
+                        { movieListHeader }
                         <Divider variant="middle" />
                     </Grid>
                 </Grid>

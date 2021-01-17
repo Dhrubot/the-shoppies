@@ -7,12 +7,12 @@ import {
     Divider,
     Grid,
     Typography,
-    IconButton,
     Button,
     List,
     CardContent,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import {SnackbarProvider} from 'notistack';
 
 
 const useStyles = makeStyles ((theme) => ({
@@ -34,6 +34,8 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
 
     const classes = useStyles()
 
+    const isComepletedNominations = nominatedMovies.length === 5
+
     const handleClearList = () => {
         setNominatedMovies([])
     }
@@ -50,28 +52,43 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
     useEffect(() => {
         handleRemove()
     }, [])
+
+    const nominationInfo = (
+        <>
+            {nominatedMovies?.length ? (
+                <>
+                    <Grid item xs={6}> 
+                        <Typography component='h6' style={{ display: "flex", marginLeft: "16px" }}>
+                        {nominatedMovies ? nominatedMovies?.length : '0'} Nominations
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            variant="outlined"
+                            className={classes.button}
+                            startIcon={<DeleteIcon />}
+                            size='small'
+                            onClick={handleClearList}
+                        >
+                            CLEAR LIST
+                        </Button>
+                    </Grid>
+                </>
+            ) : (<Grid item>
+                <Typography component='h6' style={{ display: "flex", margin: "16px",  }}>
+                    You haven't nominated any movies yet.
+                </Typography>
+            </Grid>)}
+        </>
+    )
     
     return (
+        <SnackbarProvider>
         <Card className={classes.nominatedListBox} >
             <CardHeader title='Nominations List' subheader='Maximum 5 nominations allowed.'/>
             <Divider variant="middle" />
             <Grid container alignItems='center'>
-                <Grid item xs={6}> 
-                    <Typography component='h6' style={{ display: "flex", marginLeft: "16px" }}>
-                        {nominatedMovies ? nominatedMovies?.length : '0'} Nominations
-                    </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                    <Button
-                        variant="outlined"
-                        className={classes.button}
-                        startIcon={<DeleteIcon />}
-                        size='small'
-                        onClick={handleClearList}
-                    >
-                        CLEAR LIST
-                    </Button>
-                </Grid>
+                { nominationInfo }
             </Grid>
             <Divider variant="middle" />
             <CardContent>
@@ -85,6 +102,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
                 </List>
             </CardContent>
         </Card>
+        </SnackbarProvider>
     )
 }
 

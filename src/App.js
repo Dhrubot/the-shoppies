@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import MovieList from './components/MovieList'
+import Footer from './components/Footer'
 import NominationList from './components/NominationList'
 import { Header } from './components/Header'
 import { Grid, CssBaseline, createMuiTheme }from '@material-ui/core'
@@ -39,12 +40,13 @@ const App = () => {
           <SearchBar query={ searchQuery } setQuery={ setSearchQuery }/>
         </Grid>
         <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>
-          <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies }/>
+          <MovieList movies={ movies } nominateMovie={ setNominatedMovies } nominatedMovies={ nominatedMovies } query={searchQuery}/>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
           <NominationList nominatedMovies={ nominatedMovies } setNominatedMovies={ setNominatedMovies } />
         </Grid>
       </Grid>
+      <Footer />
     </ThemeProvider>
   )
   

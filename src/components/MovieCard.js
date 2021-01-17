@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import DefaultImg from '../images/NoImage.jpg'
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, CardActionArea, Button, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -27,21 +27,29 @@ const useStyles = makeStyles({
 const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
 
     const classes = useStyles()
-    const { enqueueSnackbar } = useSnackbar();
 
 
-
+    // Notification if wants to add movies afer 5 movies
+    const { enqueueSnackbar } = useSnackbar()
     const handleAddingNomination = (nominatedMovies, movie) => {
-        nominatedMovies.length === 5 ? enqueueSnackbar("You've nominated maxmium number of movies. Consider deleting from your nominated movie list.") : nominateMovie([...nominatedMovies, movie])
-    }
+        const message = "You've nominated maxmium number of movies. Consider deleting from your nominated movie list."
+        const snackbarColor = { variant: 'error' }
 
+        nominatedMovies.length === 5 ? enqueueSnackbar(message, snackbarColor ) 
+        : nominateMovie([...nominatedMovies, movie])
+    }
+    //Notifications after done adding 5 movies
+    const success = nominatedMovies.length === 5 ? enqueueSnackbar('Thank you for helping.', { variant: 'success' }) : ''
+
+    
+
+    // default movie poster
     const poster = movie?.Poster === 'N/A' ? DefaultImg : movie.Poster
     
 
     return (
         <Card className={classes.card} key={movie.imdbID}>
-            <CardActionArea
-            >
+            <CardActionArea>
                 <CardContent>
                     <Typography>
                         {movie.Title}
