@@ -45,7 +45,13 @@ const MovieCard = ({ movie, nominateMovie, nominatedMovies }) => {
       <CardActions onClick={() => window.open(imdbURL)}>
         <CardActionArea>
           <CardContent>
-            <Typography>{movie.Title}</Typography>
+            <Typography
+              style={{ fontWeight: "bold" }}
+              align="center"
+              noWrap={true}
+            >
+              {movie.Title}
+            </Typography>
           </CardContent>
           <CardMedia className={classes.cardMedia} image={poster} />
         </CardActionArea>

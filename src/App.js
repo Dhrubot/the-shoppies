@@ -76,11 +76,14 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {console.log(nominatedMovies)}
       <Header />
       <CssBaseline />
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           <SearchBar query={searchQuery} setQuery={setSearchQuery} />
         </Grid>
         <Grid item xs={12} sm={6} md={8} lg={8} xl={8}>

@@ -3,12 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   input: {
     borderRadius: "20px",
     height: "40px",
     backgroundColor: "rgba(0, 0, 0, 0.1)",
-    borderStyle: "none",
+    border: "2px solid #dadada;",
     width: "100%",
     color: "white",
     outline: "none",
@@ -23,10 +23,12 @@ const useStyles = makeStyles({
     border: "none",
     boxShadow: "none",
     display: "flex",
-    marginLeft: "25%",
     justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      width: "70%",
+    },
   },
-});
+}));
 
 const SearchBar = ({ query, setQuery }) => {
   const classes = useStyles();

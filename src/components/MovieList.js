@@ -79,7 +79,7 @@ const MovieList = ({
         </Grid>
       </Grid>
       <Grid container>{movieList}</Grid>
-      {pagination}
+      <Grid style={{ margin: 14 }}>{pagination}</Grid>
     </Card>
   );
 };
